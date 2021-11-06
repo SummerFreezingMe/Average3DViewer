@@ -19,7 +19,7 @@ public class ObjWriter {
         return new File(name + ".obj");
     }
 
-    protected static void saveOutput(Mesh model, String name) {
+    public static void saveOutput(Mesh model, String name) {
         File object = createFile(name);
         ArrayList<String> result = new ArrayList<>();
         saveVectors(result, model);
