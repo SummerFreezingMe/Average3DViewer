@@ -25,7 +25,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Scanner;
 
 public class GuiController {
 
@@ -93,19 +92,15 @@ windowCall(exception.getMessage());
         }
     }
 
-    public void windowCall(String msg) {
+    public static void windowCall(String msg) {
         Label secondLabel = new Label(msg);
 
-        closeButton.setText("Ok");
         StackPane secondaryLayout = new StackPane();
         secondaryLayout.getChildren().add(secondLabel);
-        secondaryLayout.getChildren().add(closeButton);
         Scene secondScene = new Scene(secondaryLayout, 230, 100);
         Stage newWindow = new Stage();
-            newWindow.setTitle("Error");
+        newWindow.setTitle("Error");
         newWindow.setScene(secondScene);
-
-        //button.setOnAction(newWindow.close());
         newWindow.show();
     }
 
@@ -113,8 +108,7 @@ windowCall(exception.getMessage());
     public void onSaveModelMenuItemClick() {
 
         if (mesh != null) {
-            windowCall("Hello");
-            ObjWriter.saveOutput(mesh, new Scanner(System.in).nextLine());
+            ObjWriter.saveOutput(mesh, "NewModel");
         } else {
             windowCall("Еще не загрузили модельку");
 

@@ -24,7 +24,7 @@ public class GraphicConveyor {
     }
 
     public static Matrix4f lookAt(Vector3f eye, Vector3f target, Vector3f up) {
-        Vector3f resultX = new Vector3f(0,0,0);
+        Vector3f resultX;
         Vector3f resultY;
         Vector3f resultZ;
 
