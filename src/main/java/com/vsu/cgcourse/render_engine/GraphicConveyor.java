@@ -112,6 +112,7 @@ public class GraphicConveyor {
     }
 
     public static Matrix4f translate(Vector3f translation, Matrix4f matrix) {
+        //todo fix
         Float[][] translateMatrix = new Float[][]{
                 {1f, 0f, 0f, translation.getX()},
                 {0f, 1f, 0f, translation.getY()},

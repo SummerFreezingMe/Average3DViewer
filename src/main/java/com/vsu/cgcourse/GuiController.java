@@ -141,13 +141,13 @@ public class GuiController {
             String fileContent = Files.readString(fileName);
             mesh = ObjReader.read(fileContent);
             unmoddedMesh = ObjReader.read(fileContent);
-            // todo обработка ошибок
         } catch (IOException exception) {
             windowCall(exception.getMessage());
         }
     }
 
     public static void windowCall(String msg) {
+        //todo button
         Label secondLabel = new Label(msg);
         StackPane secondaryLayout = new StackPane();
         secondaryLayout.getChildren().add(secondLabel);
@@ -160,6 +160,7 @@ public class GuiController {
 
     @FXML
     public void onSaveModelMenuItemClick() {
+        //todo saving modded model
         if (mesh != null) {
             ObjWriter.saveOutput(mesh, "NewModel");
         } else {
