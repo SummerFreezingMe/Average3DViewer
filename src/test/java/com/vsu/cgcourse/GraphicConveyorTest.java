@@ -12,30 +12,6 @@ class GraphicConveyorTest {
     private static final int MATRIX_4F_LENGTH = 4;
 
     @Test
-    void rotateScaleTranslate() {
-        float[] husk = new float[]{
-                1, 0, 0, 0,
-                0, 1, 0, 0,
-                0, 0, 1, 0,
-                0, 0, 0, 1};
-        Float[][] expectedMatrix = new Float[4][4];
-        for (int row = 0; row < 4; row++) {
-            for (int col = 0; col < 4; col++) {
-                expectedMatrix[row][col] = husk[row * 4 + col];
-            }
-        }
-        Matrix4f expectedResult = new Matrix4f(expectedMatrix);
-        Matrix4f result = GraphicConveyor.rotateScaleTranslate();
-        for (int row = 0; row < MATRIX_4F_LENGTH; row++) {
-            for (int col = 0; col < MATRIX_4F_LENGTH; col++) {
-                Assertions.assertEquals(result.matrix[row][col], expectedResult.matrix[row][col]);
-            }
-        }
-
-    }
-
-
-    @Test
     void testLookAt() {
         Vector3f eye = new Vector3f(0f, 0f, 100f);
         Vector3f target = new Vector3f(0f, 0f, 0f);
@@ -101,7 +77,7 @@ class GraphicConveyorTest {
             }
         }
         Vector3f result = GraphicConveyor.multiplyMatrix4ByVector3(new Matrix4f(matrix), vertex);
-        Vector3f expectedResult = new Vector3f(0.06796186f, 2.4006991f, 0.99998033f);
+        Vector3f expectedResult = new Vector3f(0.006216516f, 0.21959352f, -0.010001799f);
         Assertions.assertEquals(result.getX(), expectedResult.getX());
         Assertions.assertEquals(result.getY(), expectedResult.getY());
         Assertions.assertEquals(result.getZ(), expectedResult.getZ());
@@ -117,4 +93,68 @@ class GraphicConveyorTest {
         Assertions.assertEquals(expectedResult.x, result.x);
         Assertions.assertEquals(expectedResult.y, result.y);
     }
-}
+    @Test
+    void rotate() {
+        Vector3f rotation = new Vector3f(1, 0, 0);
+        Float[][] rotateMatrix = new Float[][]{
+                {1f, 0f, 0f, 0f},
+                {0f, 1f, 0f, 0f},
+                {0f, 0f, 1f, 0f},
+                {0f, 0f, 0f, 1f}
+        };
+        Matrix4f result=GraphicConveyor.rotate(rotation,new Matrix4f(rotateMatrix));
+        Float[][] expectedResult = new Float[][]{
+                {1f, 0f, 0f, 0f},
+                {0f, 0.9998477f, -0.017452406f, 0f},
+                {0f, 0.017452406f, 0.9998477f, 0f},
+                {0f, 0f, 0f, 1f}
+
+        };
+        result.equals(new Matrix4f(expectedResult));
+            }
+
+    @Test
+    void translate() {
+        Vector3f translating = new Vector3f(1.5F, 0, 0);
+        Float[][] translatingMatrix = new Float[][]{
+                {1f, 0f, 0f, 0f},
+                {0f, 1f, 0f, 0f},
+                {0f, 0f, 1f, 0f},
+                {0f, 0f, 0f, 1f}
+        };
+        Matrix4f result=GraphicConveyor.translate(translating,new Matrix4f(translatingMatrix));
+        Float[][] expectedResult = new Float[][]{
+                {1f, 0f, 0f, 1.5f},
+                {0f, 1f, 0f, 0f},
+                {0f, 0f, 1f, 0f},
+                {0f, 0f, 0f, 1f}
+        };
+        for (int row = 0; row < MATRIX_4F_LENGTH; row++) {
+            for (int col = 0; col < MATRIX_4F_LENGTH; col++) {
+                Assertions.assertEquals(result.matrix[row][col], expectedResult[row][col]);
+            }
+        }
+    }
+
+    @Test
+    void scale() {
+        Vector3f scaling = new Vector3f(1.5F, 1, 1);
+        Float[][] scaleMatrix = new Float[][]{
+                {1f, 0f, 0f, 0f},
+                {0f, 1f, 0f, 0f},
+                {0f, 0f, 1f, 0f},
+                {0f, 0f, 0f, 1f}
+        };
+        Matrix4f result=GraphicConveyor.scale(scaling,new Matrix4f(scaleMatrix));
+        Float[][] expectedResult = new Float[][]{
+                {1.5f, 0f, 0f, 0f},
+                {0f, 1f, 0f, 0f},
+                {0f, 0f, 1f, 0f},
+                {0f, 0f, 0f, 1f}
+        };
+        for (int row = 0; row < MATRIX_4F_LENGTH; row++) {
+            for (int col = 0; col < MATRIX_4F_LENGTH; col++) {
+                Assertions.assertEquals(result.matrix[row][col], expectedResult[row][col]);
+            }
+    }
+}}

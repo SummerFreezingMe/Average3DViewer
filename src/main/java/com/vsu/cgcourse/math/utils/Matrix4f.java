@@ -33,4 +33,15 @@ public class Matrix4f {
     public Matrix4f(Float[][] test) {
         this.matrix = test;
     }
+
+    public boolean equals(Matrix4f other) {
+        final float eps = 1e-7f;
+        for (int row = 0; row < 4; row++) {
+            for (int col = 0; col < 4; col++) {
+                if(Math.abs( matrix[row][col] - other.matrix[row][col])>eps){
+                    return false;
+                }
+            }}
+        return true;
+        }
 }

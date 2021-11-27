@@ -1,22 +1,18 @@
 package com.vsu.cgcourse.render_engine;
 
 import com.vsu.cgcourse.math.utils.*;
+import com.vsu.cgcourse.model.Mesh;
 
 public class GraphicConveyor {
     static VectorUtils utils = new VectorUtils();
-    public static Matrix4f rotateScaleTranslate() {
-        float[] husk = new float[]{
-                1, 0, 0, 0,
-                0, 1, 0, 0,
-                0, 0, 1, 0,
-                0, 0, 0, 1};
-        Float[][] matrix = new Float[4][4];
-        for (int row = 0; row < 4; row++) {
-            for (int col = 0; col < 4; col++) {
-                matrix[row][col] = husk[row * 4 + col];
-            }
-        }
-        return new Matrix4f(matrix);
+    static MatrixUtils utilsM = new MatrixUtils();
+
+    public static Matrix4f modelMatrix(Vector3f scale, Vector3f rotate,Vector3f translate, Mesh mesh) {
+        Matrix4f rtsMatrix = new Matrix4f(mesh.matrix);
+        rtsMatrix=scale(scale, rtsMatrix);
+        rtsMatrix=rotate(rotate, rtsMatrix);
+        rtsMatrix = translate(translate, rtsMatrix);
+        return rtsMatrix;
     }
 
     public static Matrix4f lookAt(Vector3f eye, Vector3f target) {
@@ -73,14 +69,68 @@ public class GraphicConveyor {
     }
 
     public static Vector3f multiplyMatrix4ByVector3(final Matrix4f matrix, final Vector3f vertex) {
-        final float x = (vertex.x * matrix.matrix[0][0] ) + (vertex.y * matrix.matrix[1][0] ) + (vertex.z * matrix.matrix[2][0] ) + matrix.matrix[3][0] ;
-        final float y = (vertex.x * matrix.matrix[0][1] ) + (vertex.y * matrix.matrix[1][1] ) + (vertex.z * matrix.matrix[2][1] ) + matrix.matrix[3][1] ;
-        final float z = (vertex.x * matrix.matrix[0][2] ) + (vertex.y * matrix.matrix[1][2] ) + (vertex.z * matrix.matrix[2][2] ) + matrix.matrix[3][2] ;
-        final float w = (vertex.x * matrix.matrix[0][3] ) + (vertex.y * matrix.matrix[1][3] ) + (vertex.z * matrix.matrix[2][3] ) + matrix.matrix[3][3] ;
-        return new Vector3f(x / w, y / w, z / w);
+       Vector4f v = utilsM.matrixOnVector(matrix,new Vector4f(vertex.x, vertex.y, vertex.z, 1f));
+        return new Vector3f(v.getX() / v.getV(), v.getY() / v.getV(), v.getZ() / v.getV());
     }
 
     public static Point2f vertexToPoint(final Vector3f vertex, final int width, final int height) {
         return new Point2f(vertex.x * width + width / 2.0F, -vertex.y * height + height / 2.0F);
     }
+
+    public static Matrix4f rotate(Vector3f rotate, Matrix4f matrix) {
+        float sinX = (float) Math.sin(Math.toRadians(rotate.getX()));
+        float cosX = (float) Math.cos(Math.toRadians(rotate.getX()));
+        float sinY = (float) Math.sin(Math.toRadians(rotate.getY()));
+        float cosY = (float) Math.cos(Math.toRadians(rotate.getY()));
+        float sinZ = (float) Math.sin(Math.toRadians(rotate.getZ()));
+        float cosZ = (float) Math.cos(Math.toRadians(rotate.getZ()));
+
+        Float[][] rotateZMatrix = new Float[][]{
+                {cosZ, -sinZ, 0f, 0f},
+                {sinZ, cosZ, 0f, 0f},
+                {0f, 0f, 1f, 0f},
+                {0f, 0f, 0f, 1f}
+        };
+        Float[][] rotateYMatrix = new Float[][]{
+                {cosY, 0f, sinY, 0f},
+                {0f, 1f, 0f, 0f},
+                {-sinY, 0f, cosY, 0f},
+                {0f, 0f, 0f, 1f}
+        };
+        Float[][] rotateXMatrix = new Float[][]{
+                {1f, 0f, 0f, 0f},
+                {0f, cosX, -sinX, 0f},
+                {0f, sinX, cosX, 0f},
+                {0f, 0f, 0f, 1f}
+        };
+        Matrix4f rotationMatrix = new Matrix4f(rotateZMatrix);
+        Matrix4f yAxisRotation = new Matrix4f(rotateYMatrix);
+        Matrix4f xAxisRotation = new Matrix4f(rotateXMatrix);
+        rotationMatrix=utilsM.matrixMultiply(rotationMatrix,yAxisRotation);
+        rotationMatrix=utilsM.matrixMultiply(rotationMatrix,xAxisRotation);
+        return utilsM.matrixMultiply(matrix,rotationMatrix);
+    }
+
+    public static Matrix4f translate(Vector3f translation, Matrix4f matrix) {
+        Float[][] translateMatrix = new Float[][]{
+                {1f, 0f, 0f, translation.getX()},
+                {0f, 1f, 0f, translation.getY()},
+                {0f, 0f, 1f, translation.getZ()},
+                {0f, 0f, 0f, 1f}
+        };
+        Matrix4f translateMatrix4f = new Matrix4f(translateMatrix);
+        translateMatrix4f=utilsM.matrixMultiply(translateMatrix4f,matrix);
+        return translateMatrix4f;
+    }
+    public static Matrix4f scale(Vector3f scale, Matrix4f matrix) {
+        Float[][] scaleMatrix = new Float[][]{
+                {scale.getX(), 0f, 0f, 0f},
+                {0f, scale.getY(), 0f, 0f},
+                {0f, 0f, scale.getZ(), 0f},
+                {0f, 0f,    0f,        1f}
+        };
+        Matrix4f scaleMatrix4f = new Matrix4f(scaleMatrix);
+        return utilsM.matrixMultiply(matrix,scaleMatrix4f);
+    }
+
 }

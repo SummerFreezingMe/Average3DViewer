@@ -3,8 +3,8 @@
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.input.*?>
-<?import javafx.scene.layout.AnchorPane?>
-<AnchorPane fx:id="anchorPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8"
+<?import javafx.scene.layout.*?>
+<AnchorPane fx:id="anchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.vsu.cgcourse.GuiController">
     <MenuBar>
         <Menu mnemonicParsing="false" text="File">
@@ -16,6 +16,11 @@
             <MenuItem mnemonicParsing="false" onAction="#onSaveModelMenuItemClick" text="Save Model">
                 <accelerator>
                     <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP"/>
+                </accelerator>
+            </MenuItem>
+            <MenuItem mnemonicParsing="false" onAction="#onSaveUnmoddedModelMenuItemClick" text="Save Model">
+                <accelerator>
+                    <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="DOWN" shortcut="UP"/>
                 </accelerator>
             </MenuItem>
         </Menu>
@@ -51,7 +56,31 @@
                 </accelerator>
             </MenuItem>
         </Menu>
+        <Menu mnemonicParsing="false" text="Model Options">
+            <MenuItem mnemonicParsing="false" onAction="#setScale" text="Scale">
+                <accelerator>
+                    <KeyCodeCombination alt="UP" code="X" control="UP" meta="UP" shift="UP" shortcut="UP"/>
+                </accelerator>
+            </MenuItem>
+            <MenuItem mnemonicParsing="false" onAction="#setRotate" text="Rotate">
+                <accelerator>
+                    <KeyCodeCombination alt="UP" code="Y" control="UP" meta="UP" shift="UP" shortcut="UP"/>
+                </accelerator>
+            </MenuItem>
+            <MenuItem mnemonicParsing="false" onAction="#setTranslate" text="Translate">
+                <accelerator>
+                    <KeyCodeCombination alt="UP" code="Z" control="UP" meta="UP" shift="UP" shortcut="UP"/>
+                </accelerator>
+            </MenuItem>
+            <MenuItem mnemonicParsing="false" onAction="#setMove" text="Move">
+                <accelerator>
+                    <KeyCodeCombination alt="UP" code="M" control="UP" meta="UP" shift="UP" shortcut="UP"/>
+                </accelerator>
+            </MenuItem>
+        </Menu>
     </MenuBar>
 
-    <Canvas fx:id="canvas" height="870" layoutX="114.0" layoutY="104.0" width="1600" AnchorPane.topAnchor="104.0"/>
+    <Canvas fx:id="canvas" height="870" layoutX="114.0" layoutY="104.0" style="-fx-view-order: 2;" width="1600"
+            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+            AnchorPane.topAnchor="0.0"/>
 </AnchorPane>
