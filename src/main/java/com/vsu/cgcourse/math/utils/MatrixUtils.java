@@ -13,7 +13,7 @@ public class MatrixUtils {
     }
 
     public Matrix4f matrixSum(final Matrix4f m1, final Matrix4f m2) {
-        Float[][] m3 = new Float[m1.MATRIX_SIZE][m2.MATRIX_SIZE];
+        float[][] m3 = new float[m1.MATRIX_SIZE][m2.MATRIX_SIZE];
         for (int row = 0; row < m1.MATRIX_SIZE; row++) {
             for (int col = 0; col < m2.MATRIX_SIZE; col++) {
                 m3[row][col] = m1.matrix[row][col] + m2.matrix[row][col];
@@ -33,7 +33,7 @@ public class MatrixUtils {
     }
 
     public Matrix4f matrixDeduction(final Matrix4f m1, final Matrix4f m2) {
-        Float[][] m3 = new Float[m1.MATRIX_SIZE][m2.MATRIX_SIZE];
+        float[][] m3 = new float[m1.MATRIX_SIZE][m2.MATRIX_SIZE];
         for (int row = 0; row < m1.MATRIX_SIZE; row++) {
             for (int col = 0; col < m2.MATRIX_SIZE; col++) {
                 m3[row][col] = m1.matrix[row][col] - m2.matrix[row][col];
@@ -69,7 +69,7 @@ public class MatrixUtils {
     }
 
     public Matrix4f matrixTranspiration(final Matrix4f m) {
-        Float[][] t = new Float[m.MATRIX_SIZE][m.MATRIX_SIZE];
+        float[][] t = new float[m.MATRIX_SIZE][m.MATRIX_SIZE];
         for (int row = 0; row < m.MATRIX_SIZE; row++) {
             for (int col = 0; col < m.MATRIX_SIZE; col++) {
                 t[row][col] = m.matrix[col][row];
@@ -108,7 +108,7 @@ public class MatrixUtils {
         return det;
     }
     public Matrix4f matrixMultiply(final Matrix4f m1, final Matrix4f m2) {
-        Float[][] m3 = new Float[m1.MATRIX_SIZE][m1.MATRIX_SIZE];
+        float[][] m3 = new float[m1.MATRIX_SIZE][m1.MATRIX_SIZE];
         m3[0][0]=m1.matrix[0][0]*m2.matrix[0][0]+m1.matrix[0][1]*m2.matrix[1][0]+m1.matrix[0][2]*m2.matrix[2][0]+m1.matrix[0][3]*m2.matrix[3][0];
         m3[0][1]=m1.matrix[0][0]*m2.matrix[0][1]+m1.matrix[0][1]*m2.matrix[1][1]+m1.matrix[0][2]*m2.matrix[2][1]+m1.matrix[0][3]*m2.matrix[3][1];
         m3[0][2]=m1.matrix[0][0]*m2.matrix[0][2]+m1.matrix[0][1]*m2.matrix[1][2]+m1.matrix[0][2]*m2.matrix[2][2]+m1.matrix[0][3]*m2.matrix[3][2];

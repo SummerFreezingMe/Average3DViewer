@@ -21,7 +21,7 @@ public class RenderEngine {
             final Mesh mesh,
             final int width,
             final int height) {
-        Matrix4f modelMatrix = utils.matrixTranspiration(new Matrix4f(mesh.matrix));
+        Matrix4f modelMatrix = new Matrix4f(mesh.matrix);
         Matrix4f viewMatrix = utils.matrixTranspiration(camera.getViewMatrix());
         Matrix4f projectionMatrix = utils.matrixTranspiration(camera.getProjectionMatrix());
         Matrix4f modelViewProjectionMatrix = new Matrix4f(projectionMatrix.matrix);

@@ -1,10 +1,9 @@
 
 package com.vsu.cgcourse;
+
 import com.vsu.cgcourse.math.utils.*;
-import com.vsu.cgcourse.math.utils.Matrix4f;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
 
 import java.util.Arrays;
 
@@ -46,18 +45,18 @@ class MatrixUtilsTest {
         MatrixUtils util = new MatrixUtils();
         Matrix4f expected = new Matrix4f();
         expected = expected.createSingularMatrix();
-        Float[] array1 = {-2f, -3f, -3f, -3f,
+        float[] array1 = {-2f, -3f, -3f, -3f,
                 -3f, -2f, -3f, -3f,
                 -3f, -3f, -2f, -3f,
                 -3f, -3f, -3f, -2f,};
-        Float[][] first = new Float[MATRIX_4F_LENGTH][MATRIX_4F_LENGTH];
+        float[][] first = new float[MATRIX_4F_LENGTH][MATRIX_4F_LENGTH];
         for (int row = 0; row < MATRIX_4F_LENGTH; row++) {
             for (int col = 0; col < MATRIX_4F_LENGTH; col++) {
                 first[row][col] = array1[row * 4 + col];
             }
         }
-        Float[][] second = new Float[MATRIX_4F_LENGTH][MATRIX_4F_LENGTH];
-        for (Float[] row : second) {
+        float[][] second = new float[MATRIX_4F_LENGTH][MATRIX_4F_LENGTH];
+        for (float[] row : second) {
             Arrays.fill(row, 3f);
 
         }
@@ -107,21 +106,21 @@ class MatrixUtilsTest {
         MatrixUtils util = new MatrixUtils();
         Matrix4f expected = new Matrix4f();
         expected = expected.createSingularMatrix();
-        Float[] array1 = {1f, 2f, 3f, 4f,
+        float[] array1 = {1f, 2f, 3f, 4f,
                 5f, 6f, 7f, 8f,
                 9f, 10f, 11f, 12f,
                 13f, 14f, 15f, 16f};
-        Float[][] first = new Float[MATRIX_4F_LENGTH][MATRIX_4F_LENGTH];
+        float[][] first = new float[MATRIX_4F_LENGTH][MATRIX_4F_LENGTH];
         for (int row = 0; row < MATRIX_4F_LENGTH; row++) {
             for (int col = 0; col < MATRIX_4F_LENGTH; col++) {
                 first[row][col] = array1[row * MATRIX_4F_LENGTH + col];
             }
         }
-        Float[] array2 = {0f, 2f, 3f, 4f,
+        float[] array2 = {0f, 2f, 3f, 4f,
                 5f, 5f, 7f, 8f,
                 9f, 10f, 10f, 12f,
                 13f, 14f, 15f, 15f};
-        Float[][] second = new Float[MATRIX_4F_LENGTH][MATRIX_4F_LENGTH];
+        float[][] second = new float[MATRIX_4F_LENGTH][MATRIX_4F_LENGTH];
         for (int row = 0; row < MATRIX_4F_LENGTH; row++) {
             for (int col = 0; col < MATRIX_4F_LENGTH; col++) {
                 second[row][col] = array2[row * MATRIX_4F_LENGTH + col];
@@ -198,21 +197,21 @@ class MatrixUtilsTest {
     void testTranspiration4() {
         MatrixUtils util = new MatrixUtils();
 
-        Float[] arr1 = {1f, 5f, 9f, 13f,
+        float[] arr1 = {1f, 5f, 9f, 13f,
                 2f, 6f, 10f, 14f,
                 3f, 7f, 11f, 15f,
                 4f, 8f, 12f, 16f};
-        Float[][] first = new Float[MATRIX_4F_LENGTH][MATRIX_4F_LENGTH];
+        float[][] first = new float[MATRIX_4F_LENGTH][MATRIX_4F_LENGTH];
         for (int row = 0; row < MATRIX_4F_LENGTH; row++) {
             for (int col = 0; col < MATRIX_4F_LENGTH; col++) {
                 first[row][col] = arr1[row * MATRIX_4F_LENGTH + col];
             }
         }
-        Float[] second = {1f, 2f, 3f, 4f,
+        float[] second = {1f, 2f, 3f, 4f,
                 5f, 6f, 7f, 8f,
                 9f, 10f, 11f, 12f,
                 13f, 14f, 15f, 16f};
-        Float[][] test = new Float[MATRIX_4F_LENGTH][MATRIX_4F_LENGTH];
+        float[][] test = new float[MATRIX_4F_LENGTH][MATRIX_4F_LENGTH];
         for (int row = 0; row < MATRIX_4F_LENGTH; row++) {
             for (int col = 0; col < MATRIX_4F_LENGTH; col++) {
                 test[row][col] = second[row * MATRIX_4F_LENGTH + col];
@@ -249,11 +248,11 @@ class MatrixUtilsTest {
     @Test
     void testCountDeterminate4() {
         MatrixUtils util = new MatrixUtils();
-        Float[] arr1 = {1f, 3f, 3f, -7f,
+        float[] arr1 = {1f, 3f, 3f, -7f,
                 5f, 6f, 7f, 8f,
                 9f, 10f, 11f, 12f,
                 13f, 14f, 15f, 1f};
-        Float[][] first = new Float[MATRIX_4F_LENGTH][MATRIX_4F_LENGTH];
+        float[][] first = new float[MATRIX_4F_LENGTH][MATRIX_4F_LENGTH];
         for (int row = 0; row < MATRIX_4F_LENGTH; row++) {
             for (int col = 0; col < MATRIX_4F_LENGTH; col++) {
                 first[row][col] = arr1[row * MATRIX_4F_LENGTH + col];

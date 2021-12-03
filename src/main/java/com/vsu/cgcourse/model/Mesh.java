@@ -18,7 +18,7 @@ public class Mesh {
     public ArrayList<ArrayList<Integer>> polygonTextureVertexIndices = new ArrayList<>();
     public ArrayList<ArrayList<Integer>> polygonNormalIndices = new ArrayList<>();
 
-    public Float[][] matrix = new Float[][]{
+    public float[][] matrix = new float[][]{
             {1f, 0f, 0f, 0f},
             {0f, 1f, 0f, 0f},
             {0f, 0f, 1f, 0f},

@@ -32,7 +32,7 @@ public class GraphicConveyor {
         utils.normalisation(resultY);
         utils.normalisation(resultZ);
 
-        Float[][] matrix = new Float[4][4];
+        float[][] matrix = new float[4][4];
               matrix[0][0]=  resultX.x;
                       matrix[0][1]=    resultY.x;
                       matrix[0][2]=resultZ.x;
@@ -85,19 +85,19 @@ public class GraphicConveyor {
         float sinZ = (float) Math.sin(Math.toRadians(rotate.getZ()));
         float cosZ = (float) Math.cos(Math.toRadians(rotate.getZ()));
 
-        Float[][] rotateZMatrix = new Float[][]{
+        float[][] rotateZMatrix = new float[][]{
                 {cosZ, -sinZ, 0f, 0f},
                 {sinZ, cosZ, 0f, 0f},
                 {0f, 0f, 1f, 0f},
                 {0f, 0f, 0f, 1f}
         };
-        Float[][] rotateYMatrix = new Float[][]{
+        float[][] rotateYMatrix = new float[][]{
                 {cosY, 0f, sinY, 0f},
                 {0f, 1f, 0f, 0f},
                 {-sinY, 0f, cosY, 0f},
                 {0f, 0f, 0f, 1f}
         };
-        Float[][] rotateXMatrix = new Float[][]{
+        float[][] rotateXMatrix = new float[][]{
                 {1f, 0f, 0f, 0f},
                 {0f, cosX, -sinX, 0f},
                 {0f, sinX, cosX, 0f},
@@ -113,18 +113,18 @@ public class GraphicConveyor {
 
     public static Matrix4f translate(Vector3f translation, Matrix4f matrix) {
         //todo fix
-        Float[][] translateMatrix = new Float[][]{
+        float[][] translateMatrix = new float[][]{
                 {1f, 0f, 0f, translation.getX()},
                 {0f, 1f, 0f, translation.getY()},
                 {0f, 0f, 1f, translation.getZ()},
                 {0f, 0f, 0f, 1f}
         };
         Matrix4f translateMatrix4f = new Matrix4f(translateMatrix);
-        translateMatrix4f=utilsM.matrixMultiply(translateMatrix4f,matrix);
-        return translateMatrix4f;
+         return utilsM.matrixMultiply(translateMatrix4f,matrix);
+
     }
     public static Matrix4f scale(Vector3f scale, Matrix4f matrix) {
-        Float[][] scaleMatrix = new Float[][]{
+        float[][] scaleMatrix = new float[][]{
                 {scale.getX(), 0f, 0f, 0f},
                 {0f, scale.getY(), 0f, 0f},
                 {0f, 0f, scale.getZ(), 0f},

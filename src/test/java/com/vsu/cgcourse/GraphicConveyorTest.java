@@ -21,7 +21,7 @@ class GraphicConveyorTest {
                 0f, 1f, 0f, 0f,
                 0f, 0f, -1f, 0f,
                 -0f, -0f, 100f, 1f};
-        Float[][] expectedMatrix = new Float[4][4];
+        float[][] expectedMatrix = new float[4][4];
         for (int row = 0; row < 4; row++) {
             for (int col = 0; col < 4; col++) {
                 expectedMatrix[row][col] = husk[row * 4 + col];
@@ -47,7 +47,7 @@ class GraphicConveyorTest {
                 0f, 1.8304877f, 0f, 0f,
                 0f, 0f, 1.0002f, 1f,
                 0f, 0f, -0.020002f, 0f};
-        Float[][] expectedMatrix = new Float[4][4];
+        float[][] expectedMatrix = new float[4][4];
         for (int row = 0; row < 4; row++) {
             for (int col = 0; col < 4; col++) {
                 expectedMatrix[row][col] = husk[row * 4 + col];
@@ -70,7 +70,7 @@ class GraphicConveyorTest {
                 0f, 1.8304877f, 0f, 0f,
                 0f, 0f, -1.0002f, -1f,
                 0f, 0f, 100f, 100f};
-        Float[][] matrix = new Float[4][4];
+        float[][] matrix = new float[4][4];
         for (int row = 0; row < 4; row++) {
             for (int col = 0; col < 4; col++) {
                 matrix[row][col] = husk[row * 4 + col];
@@ -96,14 +96,14 @@ class GraphicConveyorTest {
     @Test
     void rotate() {
         Vector3f rotation = new Vector3f(1, 0, 0);
-        Float[][] rotateMatrix = new Float[][]{
+        float[][] rotateMatrix = new float[][]{
                 {1f, 0f, 0f, 0f},
                 {0f, 1f, 0f, 0f},
                 {0f, 0f, 1f, 0f},
                 {0f, 0f, 0f, 1f}
         };
         Matrix4f result=GraphicConveyor.rotate(rotation,new Matrix4f(rotateMatrix));
-        Float[][] expectedResult = new Float[][]{
+        float[][] expectedResult = new float[][]{
                 {1f, 0f, 0f, 0f},
                 {0f, 0.9998477f, -0.017452406f, 0f},
                 {0f, 0.017452406f, 0.9998477f, 0f},
@@ -116,14 +116,14 @@ class GraphicConveyorTest {
     @Test
     void translate() {
         Vector3f translating = new Vector3f(1.5F, 0, 0);
-        Float[][] translatingMatrix = new Float[][]{
+        float[][] translatingMatrix = new float[][]{
                 {1f, 0f, 0f, 0f},
                 {0f, 1f, 0f, 0f},
                 {0f, 0f, 1f, 0f},
                 {0f, 0f, 0f, 1f}
         };
         Matrix4f result=GraphicConveyor.translate(translating,new Matrix4f(translatingMatrix));
-        Float[][] expectedResult = new Float[][]{
+       float[][] expectedResult = new float[][]{
                 {1f, 0f, 0f, 1.5f},
                 {0f, 1f, 0f, 0f},
                 {0f, 0f, 1f, 0f},
@@ -139,14 +139,14 @@ class GraphicConveyorTest {
     @Test
     void scale() {
         Vector3f scaling = new Vector3f(1.5F, 1, 1);
-        Float[][] scaleMatrix = new Float[][]{
+        float[][] scaleMatrix = new float[][]{
                 {1f, 0f, 0f, 0f},
                 {0f, 1f, 0f, 0f},
                 {0f, 0f, 1f, 0f},
                 {0f, 0f, 0f, 1f}
         };
         Matrix4f result=GraphicConveyor.scale(scaling,new Matrix4f(scaleMatrix));
-        Float[][] expectedResult = new Float[][]{
+        float[][] expectedResult = new float[][]{
                 {1.5f, 0f, 0f, 0f},
                 {0f, 1f, 0f, 0f},
                 {0f, 0f, 1f, 0f},

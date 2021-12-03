@@ -1,5 +1,6 @@
 package com.vsu.cgcourse;
 
+import com.vsu.cgcourse.math.utils.Matrix4f;
 import com.vsu.cgcourse.math.utils.Vector3f;
 import com.vsu.cgcourse.model.Mesh;
 import com.vsu.cgcourse.obj_reader.ObjReader;
@@ -30,7 +31,7 @@ import java.nio.file.Path;
 
 public class GuiController {
 
-    final private float TRANSLATION = 1.5F;
+    final private float TRANSLATION = 2F;
 
     @FXML
     private AnchorPane anchorPane;
@@ -146,22 +147,39 @@ public class GuiController {
         }
     }
 
-    public static void windowCall(String msg) {
+    public void windowCall(String msg) {
         //todo button
+        closeButton = new Button();
+        closeButton.setText("Ok");
+        closeButton.setTranslateY(30);
         Label secondLabel = new Label(msg);
         StackPane secondaryLayout = new StackPane();
+        secondaryLayout.getChildren().add(closeButton);
         secondaryLayout.getChildren().add(secondLabel);
         Scene secondScene = new Scene(secondaryLayout, 230, 100);
         Stage newWindow = new Stage();
         newWindow.setTitle("Error");
         newWindow.setScene(secondScene);
         newWindow.show();
+        closeButton.setOnAction(actionEvent ->
+                newWindow.close());
+
     }
 
     @FXML
     public void onSaveModelMenuItemClick() {
         //todo saving modded model
         if (mesh != null) {
+            Matrix4f matrix4f = new Matrix4f(mesh.matrix);
+            for (int i = 0; i < mesh.vertices.size(); i++) {
+                mesh.vertices.set(i, GraphicConveyor.multiplyMatrix4ByVector3(matrix4f, mesh.vertices.get(i)));
+            }
+            mesh.matrix = new float[][]{
+                    {1, 0, 0, 0},
+                    {0, 1, 0, 0},
+                    {0, 0, 1, 0},
+                    {0, 0, 0, 1}
+            };
             ObjWriter.saveOutput(mesh, "NewModel");
         } else {
             windowCall("Error: Model not found");
