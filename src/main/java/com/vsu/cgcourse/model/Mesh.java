@@ -13,7 +13,7 @@ public class Mesh {
     public ArrayList<Vector3f> vertices = new ArrayList<>();
     public ArrayList<Vector2f> textureVertices = new ArrayList<>();
     public ArrayList<Vector3f> normals = new ArrayList<>();
-
+    private String name;
     public ArrayList<ArrayList<Integer>> polygonVertexIndices = new ArrayList<>();
     public ArrayList<ArrayList<Integer>> polygonTextureVertexIndices = new ArrayList<>();
     public ArrayList<ArrayList<Integer>> polygonNormalIndices = new ArrayList<>();
@@ -24,5 +24,14 @@ public class Mesh {
             {0f, 0f, 1f, 0f},
             {0f, 0f, 0f, 1f}
     };
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 }
 

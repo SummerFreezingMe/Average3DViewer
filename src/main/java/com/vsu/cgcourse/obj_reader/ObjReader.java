@@ -50,35 +50,32 @@ public class ObjReader {
                 // А еще это портит читаемость
                 // И не стоит забывать про тесты. Чем проще вам задать данные для теста, проверить, что метод рабочий,
                 // тем лучше.
-                case OBJ_VERTEX_TOKEN:
+                case OBJ_VERTEX_TOKEN -> {
                     result.vertices.add(parseVertex(wordsInLine, lineInd));
                     countVertex = result.vertices.size();
-                    break;
-                case OBJ_TEXTURE_TOKEN:
+                }
+                case OBJ_TEXTURE_TOKEN -> {
                     result.textureVertices.add(parseTextureVertex(wordsInLine, lineInd));
                     countTextureVertex = result.textureVertices.size();
-                    break;
-                case OBJ_NORMAL_TOKEN:
+                }
+                case OBJ_NORMAL_TOKEN -> {
                     result.normals.add(parseNormal(wordsInLine, lineInd));
                     countNormal = result.normals.size();
-                    break;
+                }
                 // А здесь описанное выше правило нарушается, и это плохо. Например, очевидно, что тестировать такой
                 // метод сложнее.
                 // Подумайте и перепишите его так, чтобы с ним было легче работать.
-                case OBJ_FACE_TOKEN:
+                case OBJ_FACE_TOKEN -> {
                     ArrayList<Integer> onePolygonVertexIndices = new ArrayList<Integer>();
                     ArrayList<Integer> onePolygonTextureVertexIndices = new ArrayList<Integer>();
                     ArrayList<Integer> onePolygonNormalIndices = new ArrayList<Integer>();
-
                     parseFace(wordsInLine, onePolygonVertexIndices, onePolygonTextureVertexIndices, onePolygonNormalIndices,
                             lineInd, countVertex, countTextureVertex, countNormal);
-
-
                     result.polygonVertexIndices.add(onePolygonVertexIndices);
                     result.polygonTextureVertexIndices.add(onePolygonTextureVertexIndices);
                     result.polygonNormalIndices.add(onePolygonNormalIndices);
-                    break;
-                default: {
+                }
+                default -> {
                 }
             }
         }
